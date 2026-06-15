@@ -1,27 +1,28 @@
-package api
+package main
 
 import (
-	"net/http"
+	"github.com/gofiber/fiber/v2/middleware/cors"
+	"github.com/joho/godotenv"
+	"github.com/payment-backend/config"
+	routes "github.com/payment-backend/route"
 
-	"github.com/gofiber/adaptor/v2"
 	"github.com/gofiber/fiber/v2"
 )
 
-var app *fiber.App
+func main() {
 
-func init() {
+	godotenv.Load(".env")
+	app := fiber.New()
 
-	app = fiber.New()
+	app.Use(cors.New(cors.Config{
+		AllowOrigins: "*",
+		AllowHeaders: "Origin, Content-Type, Accept",
+		AllowMethods: "GET,POST,PUT,DELETE,OPTIONS",
+	}))
 
-	app.Get("/", func(c *fiber.Ctx) error {
-		return c.JSON(fiber.Map{
-			"message": "Hello Marketplace API",
-		})
-	})
+	config.ConfigDatabase()
 
-	// routes.Setup(app)
-}
+	routes.Setup(app)
 
-func Handler(w http.ResponseWriter, r *http.Request) {
-	adaptor.FiberApp(app)(w, r)
+	app.Listen(":8000")
 }

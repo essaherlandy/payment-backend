@@ -7,6 +7,7 @@ import (
 	"github.com/gofiber/adaptor/v2"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
+	"github.com/joho/godotenv"
 
 	"github.com/payment-backend/config"
 	routes "github.com/payment-backend/route"
@@ -17,6 +18,8 @@ var app *fiber.App
 func init() {
 
 	app = fiber.New()
+
+	godotenv.Load(".env")
 
 	fmt.Println("FIBER CREATED")
 

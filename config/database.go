@@ -30,7 +30,7 @@ func ConfigDatabase() {
 	}
 
 	// Set postgres whitelist config
-	dsn := fmt.Sprintf("postgresql://%s:%s@%s:%s/%s?sslmode=disable",
+	dsn := fmt.Sprintf("postgresql://%s:%s@%s:%s/%s?sslmode=require",
 		pgConfig.User,
 		pgConfig.Password,
 		pgConfig.Host,

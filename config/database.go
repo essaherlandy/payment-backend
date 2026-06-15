@@ -52,7 +52,7 @@ func ConfigDatabase() {
 	)
 
 	if err != nil {
-		panic(err)
+		fmt.Println("failed to connect database")
 	}
 
 	DB = db

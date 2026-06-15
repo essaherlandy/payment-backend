@@ -5,20 +5,18 @@ import (
 	"net/http"
 
 	"github.com/gofiber/adaptor/v2"
+	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
-	"github.com/joho/godotenv"
+
 	"github.com/payment-backend/config"
 	routes "github.com/payment-backend/route"
-
-	"github.com/gofiber/fiber/v2"
 )
 
 var app *fiber.App
 
-func main() {
+func init() {
 
-	godotenv.Load(".env")
-	app := fiber.New()
+	app = fiber.New()
 
 	fmt.Println("FIBER CREATED")
 
@@ -34,10 +32,9 @@ func main() {
 
 	routes.Setup(app)
 
-	app.Listen(":8000")
+	fmt.Println("ROUTES READY")
 }
 
-// WAJIB huruf besar
 func Handler(w http.ResponseWriter, r *http.Request) {
 	adaptor.FiberApp(app)(w, r)
 }

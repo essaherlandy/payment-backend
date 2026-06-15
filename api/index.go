@@ -1,4 +1,4 @@
-package main
+package handler
 
 import (
 	"net/http"
@@ -11,6 +11,8 @@ import (
 
 	"github.com/gofiber/fiber/v2"
 )
+
+var app *fiber.App
 
 func main() {
 

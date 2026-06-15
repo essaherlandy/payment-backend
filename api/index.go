@@ -1,6 +1,9 @@
 package main
 
 import (
+	"net/http"
+
+	"github.com/gofiber/adaptor/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/joho/godotenv"
 	"github.com/payment-backend/config"
@@ -25,4 +28,9 @@ func main() {
 	routes.Setup(app)
 
 	app.Listen(":8000")
+}
+
+// WAJIB huruf besar
+func Handler(w http.ResponseWriter, r *http.Request) {
+	adaptor.FiberApp(app)(w, r)
 }

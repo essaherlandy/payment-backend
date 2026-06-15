@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/gofiber/adaptor/v2"
@@ -19,6 +20,8 @@ func main() {
 	godotenv.Load(".env")
 	app := fiber.New()
 
+	fmt.Println("FIBER CREATED")
+
 	app.Use(cors.New(cors.Config{
 		AllowOrigins: "*",
 		AllowHeaders: "Origin, Content-Type, Accept",
@@ -26,6 +29,8 @@ func main() {
 	}))
 
 	config.ConfigDatabase()
+
+	fmt.Println("DB CONNECTED")
 
 	routes.Setup(app)
 
